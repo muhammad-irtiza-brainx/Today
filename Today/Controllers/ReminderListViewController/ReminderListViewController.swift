@@ -9,10 +9,20 @@ import UIKit
 
 class ReminderListViewController: UITableViewController {
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet var filterSegmentedControl: UISegmentedControl!
+    
     // MARK: - IBActions
     
-    @IBAction func addButtonTriggered(_ sender: UIBarButtonItem) {
+    @IBAction
+    func addButtonTriggered(_ sender: UISegmentedControl) {
         addReminder()
+    }
+    @IBAction
+    func segmentControlChanged(_ sender: Any) {
+        reminderListDataSource?.filter = filter
+        tableView.reloadData()
     }
     
     // MARK:- Static Properties
@@ -25,6 +35,9 @@ class ReminderListViewController: UITableViewController {
     // MARK: - Private Properties
     
     private var reminderListDataSource: ReminderListDataSource?
+    private var filter: ReminderListDataSource.Filter {
+        return ReminderListDataSource.Filter(rawValue: filterSegmentedControl.selectedSegmentIndex) ?? .today
+    }
     
     // MARK: - Private Methods
     
