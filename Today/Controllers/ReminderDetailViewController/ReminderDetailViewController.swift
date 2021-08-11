@@ -55,7 +55,7 @@ class ReminderDetailViewController: UITableViewController {
                 self.reminder = temporaryReminder
                 self.temporaryReminder = nil
                 reminderChangeAction?(temporaryReminder)
-                dataSource = ReminderDetailDataSource(reminder: reminder)
+                dataSource = ReminderDetailDataSource(reminder: temporaryReminder)
             } else {
                 dataSource = ReminderDetailDataSource(reminder: reminder)
             }
@@ -74,5 +74,10 @@ class ReminderDetailViewController: UITableViewController {
         setEditing(false, animated: false)
         navigationItem.setRightBarButton(editButtonItem, animated: false)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: ReminderDetailEditDataSource.dateLabelCellIdentifier)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+        
     }
 }

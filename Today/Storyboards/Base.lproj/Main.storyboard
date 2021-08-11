@@ -71,7 +71,11 @@
                             <outlet property="delegate" destination="ZRb-ps-COn" id="gK1-iv-dUo"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="2Pw-Oj-rwN"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="fNb-R7-OIF"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W48-T9-4x7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -194,13 +198,17 @@
         <!--Navigation Controller-->
         <scene sceneID="8Fk-Qj-HJj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z1M-Z8-ms0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="z1M-Z8-ms0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="t35-gP-pcN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OtK-Nl-7v7">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="ZRb-ps-COn" kind="relationship" relationship="rootViewController" id="UnM-HE-aNm"/>
                     </connections>
