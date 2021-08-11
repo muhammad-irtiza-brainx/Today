@@ -21,6 +21,9 @@ class ReminderListDataSource: NSObject {
     public func updateReminder(_ reminder: Reminder, at row: Int) {
         Reminder.reminders[row] = reminder
     }
+    public func addReminder(_ reminder: Reminder) {
+        Reminder.reminders.insert(reminder, at: 0)
+    }
     
 }
 
