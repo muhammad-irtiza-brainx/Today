@@ -9,10 +9,13 @@ import UIKit
 
 class ReminderDetailEditDataSource: NSObject {
     
+    typealias ReminderChangeAction = (Reminder) -> Void
+    
     // MARK: - Initializers
     
-    init(reminder: Reminder) {
+    init(reminder: Reminder, changeAction: @escaping ReminderChangeAction) {
         self.reminder = reminder
+        self.reminderChangeAction = changeAction
     }
     
     // MARK: - Static Properties
@@ -27,6 +30,7 @@ class ReminderDetailEditDataSource: NSObject {
     
     // MARK: - Private Properties
     
+    private var reminderChangeAction: ReminderChangeAction?
     private lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -46,21 +50,31 @@ class ReminderDetailEditDataSource: NSObject {
         switch section {
         case .title:
             if let titleCell = cell as? EditTitleCell {
-                titleCell.configure(reminderTitle: reminder.title)
+                titleCell.configure(reminderTitle: reminder.title) { title in
+                    self.reminder.title = title
+                    self.reminderChangeAction?(self.reminder)
+                }
             }
         case .dueDate:
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
             } else {
                 if let dueDateCell = cell as? EditDateCell {
-                    dueDateCell.configure(dueDate: reminder.dueDate)
+                    dueDateCell.configure(dueDate: reminder.dueDate) { date in
+                        self.reminder.dueDate = date
+                        self.reminderChangeAction?(self.reminder)
+                        let indexPath = IndexPath(row: 0, section: section.rawValue)
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
                 }
             }
         case .note:
             if let noteCell = cell as? EditNoteCell {
-                noteCell.configure(reminderNote: reminder.note)
+                noteCell.configure(reminderNote: reminder.note) { note in
+                    self.reminder.note = note
+                    self.reminderChangeAction?(self.reminder)
+                }
             }
-            
         }
         return cell
     }
@@ -113,7 +127,7 @@ extension ReminderDetailEditDataSource: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         ReminderDetailSection.allCases.count
     }
-    func tableView(_ tableVoew: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         ReminderDetailSection(rawValue: section)?.numOfRowsInSection ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

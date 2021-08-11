@@ -25,8 +25,14 @@ class ReminderListViewController: UITableViewController {
            let destination = segue.destination as? ReminderDetailViewController,
            let cell = sender as? UITableViewCell,
            let indexPath = tableView.indexPath(for: cell) {
-            let reminder = Reminder.reminders[indexPath.row]
-            destination.configure(reminder: reminder)
+            let rowIndex = indexPath.row
+            guard let reminder = reminderListDataSource?.getReminder(at: rowIndex) else {
+                return
+            }
+            destination.configure(reminder: reminder) { reminder in
+                self.reminderListDataSource?.updateReminder(reminder, at: rowIndex)
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
         }
     }
     

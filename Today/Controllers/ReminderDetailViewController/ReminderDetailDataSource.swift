@@ -9,6 +9,21 @@ import UIKit
 
 class ReminderDetailDataSource: NSObject {
     
+    // MARK: - Initializers
+    
+    init(reminder: Reminder) {
+        self.reminder = reminder
+        super.init()
+    }
+    
+    // MARK: - Static Properties
+    
+    static let reminderDetailCellIdentifier = "ReminderDetailCell"
+    
+    // MARK: - Private Properties
+    
+    private var reminder: Reminder
+    
     enum ReminderRow: Int, CaseIterable {
         case title
         case date
@@ -66,21 +81,6 @@ class ReminderDetailDataSource: NSObject {
                 return reminder?.note
             }
         }
-    }
-    
-    // MARK: - Static Properties
-    
-    static let reminderDetailCellIdentifier = "ReminderDetailCell"
-    
-    // MARK: - Private Properties
-    
-    private var reminder: Reminder
-    
-    // MARK: - Initializers
-    
-    init(reminder: Reminder) {
-        self.reminder = reminder
-        super.init()
     }
 }
 

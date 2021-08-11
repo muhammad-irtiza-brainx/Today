@@ -13,6 +13,15 @@ class ReminderListDataSource: NSObject {
     
     private lazy var dateFormatter = RelativeDateTimeFormatter()
     
+    // MARK: - Public Methods
+    
+    public func getReminder(at row: Int) -> Reminder {
+        return Reminder.reminders[row]
+    }
+    public func updateReminder(_ reminder: Reminder, at row: Int) {
+        Reminder.reminders[row] = reminder
+    }
+    
 }
 
 // MARK: - Data Source Methods
