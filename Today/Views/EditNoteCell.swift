@@ -27,7 +27,6 @@ class EditNoteCell: UITableViewCell {
             return
         }
         noteTextView.text = reminderNote
-        
         if let changeAction = changeAction {
             self.noteChangeAction = changeAction
         }

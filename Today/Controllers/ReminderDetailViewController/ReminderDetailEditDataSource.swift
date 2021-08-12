@@ -59,13 +59,14 @@ class ReminderDetailEditDataSource: NSObject {
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
             } else {
-                if let dueDateCell = cell as? EditDateCell {
-                    dueDateCell.configure(dueDate: reminder.dueDate) { date in
-                        self.reminder.dueDate = date
-                        self.reminderChangeAction?(self.reminder)
-                        let indexPath = IndexPath(row: 0, section: section.rawValue)
-                        tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }
+                guard let dueDateCell = cell as? EditDateCell else {
+                    break
+                }
+                dueDateCell.configure(dueDate: reminder.dueDate) { date in
+                    self.reminder.dueDate = date
+                    self.reminderChangeAction?(self.reminder)
+                    let indexPath = IndexPath(row: 0, section: section.rawValue)
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
                 }
             }
         case .note:
@@ -86,17 +87,17 @@ class ReminderDetailEditDataSource: NSObject {
         
         // MARK: - Public Properties
         
-        var sectionTitle: String {
+        public var sectionTitle: String {
             switch self {
             case .title:
-                return "Title"
+                return Strings.titleString
             case .dueDate:
-                return "Date"
+                return Strings.dateString
             case .note:
-                return "Note"
+                return Strings.noteString
             }
         }
-        var numOfRowsInSection: Int {
+        public var numOfRowsInSection: Int {
             switch self {
             case .title, .note:
                 return 1
@@ -107,7 +108,7 @@ class ReminderDetailEditDataSource: NSObject {
         
         // MARK: - Public Methods
         
-        func cellIdentifier(for row: Int) -> String {
+        public func cellIdentifier(for row: Int) -> String {
             switch self {
             case .title:
                 return Identifiers.EditTitleCell

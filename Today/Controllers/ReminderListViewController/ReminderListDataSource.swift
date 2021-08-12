@@ -106,9 +106,6 @@ extension ReminderListDataSource: UITableViewDataSource {
         let currentReminder = getReminder(at: indexPath.row)
         let dateText = currentReminder.dueDateTimeText(for: filter)
         cell.configure(title: currentReminder.title, dateText: dateText, isDone: currentReminder.isComplete) {
-            
-//            Reminder.reminders[indexPath.row].isComplete.toggle()
-            
             var modifiedReminder = currentReminder
             modifiedReminder.isComplete.toggle()
             self.updateReminder(modifiedReminder, at: indexPath.row)
@@ -127,47 +124,5 @@ extension ReminderListDataSource: UITableViewDataSource {
             tableView.reloadData()
         }
         reminderDeletedAction?()
-    }
-}
-
-extension Reminder {
-    
-    // MARK: - Static Properties
-    
-    static let timeFormatter: DateFormatter = {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none
-        timeFormatter.timeStyle = .short
-        return timeFormatter
-    }()
-    static let futureDateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        return dateFormatter
-    }()
-    static let todayDateFormatter: DateFormatter = {
-        let format = NSLocalizedString("'Today at '%@", comment: "format string for dates occuring today")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = String(format: format, "hh:mm a")
-        return dateFormatter
-    }()
-    
-    // MARK: - Public Methods
-    
-    func dueDateTimeText(for filter: ReminderListDataSource.Filter) -> String {
-        let isInToday = Locale.current.calendar.isDateInToday(dueDate)
-        switch filter {
-        case .today:
-            return Self.timeFormatter.string(from: dueDate)
-        case .future:
-            return Self.futureDateFormatter.string(from: dueDate)
-        case .all:
-            if isInToday {
-                return Self.todayDateFormatter.string(from: dueDate)
-            } else {
-                return Self.futureDateFormatter.string(from: dueDate)
-            }
-        }
     }
 }

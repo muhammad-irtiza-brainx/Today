@@ -14,7 +14,7 @@ struct Reminder {
     public var id: String
     public var title: String
     public var dueDate: Date
-    public var note: String? = nil
+    public var note: String?
     public var isComplete: Bool = false
 }
 
@@ -42,6 +42,5 @@ extension Reminder {
         Reminder(id: UUID().uuidString, title: "Reminder No. 9", dueDate: Date().addingTimeInterval(200_000), note: "This is the ninth reminder.", isComplete: false),
         
         Reminder(id: UUID().uuidString, title: "Reminder No. 10", dueDate: Date().addingTimeInterval(300_000), note: "This is the tenth reminder.", isComplete: false)
-
     ]
 }
