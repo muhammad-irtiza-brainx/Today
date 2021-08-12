@@ -94,6 +94,7 @@ class ReminderListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         reminderListDataSource = ReminderListDataSource(
             reminderCompletedAction: { reminderIndex in
             self.tableView.reloadRows(at: [IndexPath(row: reminderIndex, section: 0)], with: .automatic)
