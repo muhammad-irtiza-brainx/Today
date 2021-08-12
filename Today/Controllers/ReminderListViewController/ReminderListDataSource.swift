@@ -11,13 +11,9 @@ class ReminderListDataSource: NSObject {
     
     // MARK: - Public Properties
     
-    public var filter: Filter = .today
-    public var filteredReminders: [Reminder] {
-        return Reminder.reminders.filter {
-            filter.shouldInclude(date: $0.dueDate)
-        }.sorted {
-            $0.dueDate < $1.dueDate
-        }
+    var filter: Filter = .today
+    var filteredReminders: [Reminder] {
+        return Reminder.reminders.filter { filter.shouldInclude(date: $0.dueDate) }.sorted { $0.dueDate < $1.dueDate }
     }
     
     // MARK: - Public Methods
@@ -25,11 +21,28 @@ class ReminderListDataSource: NSObject {
     public func getReminder(at row: Int) -> Reminder {
         return filteredReminders[row]
     }
+    
     public func updateReminder(_ reminder: Reminder, at row: Int) {
-        Reminder.reminders[row] = reminder
+        let index = self.index(for: row)
+        Reminder.reminders[index] = reminder
     }
-    public func addReminder(_ reminder: Reminder) {
+    
+    public func addReminder(_ reminder: Reminder) -> Int? {
         Reminder.reminders.insert(reminder, at: 0)
+        return filteredReminders.firstIndex(where: { $0.id == reminder.id })
+    }
+    
+    public func deleteReminder(at row: Int) {
+        let index = self.index(for: row)
+        Reminder.reminders.remove(at: index)
+    }
+    
+    public func index(for filteredIndex: Int) -> Int {
+        let filteredReminder = filteredReminders[filteredIndex]
+        guard let index = Reminder.reminders.firstIndex(where: { $0.id == filteredReminder.id}) else {
+            return -1
+        }
+        return index
     }
     
     enum Filter: Int {
@@ -60,20 +73,34 @@ extension ReminderListDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filteredReminders.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReminderListViewController.reminderListCellIndentifier, for: indexPath) as? ReminderListCell else {
             return UITableViewCell()
         }
-        let currentReminder = Reminder.reminders[indexPath.row]
+        let currentReminder = getReminder(at: indexPath.row)
         let dateText = currentReminder.dueDateTimeText(for: filter)
         cell.configure(title: currentReminder.title, dateText: dateText, isDone: currentReminder.isComplete) {
             Reminder.reminders[indexPath.row].isComplete.toggle()
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else {
+            return
+        }
+        deleteReminder(at: indexPath.row)
+        tableView.performBatchUpdates({
+            tableView.deleteRows(at: [indexPath], with: .automatic)}) { (_) in
+            tableView.reloadData()
+        }
+    }
 }
 
 extension Reminder {
+    
+    // MARK: - Static Properties
     
     static let timeFormatter: DateFormatter = {
         let timeFormatter = DateFormatter()
@@ -93,6 +120,8 @@ extension Reminder {
         dateFormatter.dateFormat = String(format: format, "hh:mm a")
         return dateFormatter
     }()
+    
+    // MARK: - Public Methods
     
     func dueDateTimeText(for filter: ReminderListDataSource.Filter) -> String {
         let isInToday = Locale.current.calendar.isDateInToday(dueDate)
