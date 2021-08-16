@@ -59,12 +59,13 @@ class ReminderDetailEditDataSource: NSObject {
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
             } else {
-                let dueDateCell = cell as! EditDateCell
-                dueDateCell.configure(dueDate: reminder.dueDate) { date in
-                    self.reminder.dueDate = date
-                    self.reminderChangeAction?(self.reminder)
-                    let indexPath = IndexPath(row: 0, section: section.rawValue)
-                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                if let dueDateCell = cell as! EditDateCell {
+                    dueDateCell.configure(dueDate: reminder.dueDate) { date in
+                        self.reminder.dueDate = date
+                        self.reminderChangeAction?(self.reminder)
+                        let indexPath = IndexPath(row: 0, section: section.rawValue)
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
                 }
             }
         case .note:
