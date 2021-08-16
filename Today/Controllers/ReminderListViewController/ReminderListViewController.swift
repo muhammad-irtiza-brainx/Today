@@ -47,16 +47,16 @@ class ReminderListViewController: UITableViewController {
     // MARK: - Private Methods
     
     private func addReminder() {
-        let storyboard = UIStoryboard(name: Self.mainStoryboardName, bundle: nil)
-        let detailViewController: ReminderDetailViewController = storyboard.instantiateViewController(identifier: Self.detailViewControllerIdentifier)
-        let reminder = Reminder(id: UUID().uuidString ,title: Strings.newReminderString, dueDate: Date())
+        let detailViewController = UIViewController.instantiate(ReminderDetailViewController.self, fromStoryboard: UIStoryboard.Name.Main)
+        let reminder = Reminder(id: UUID().uuidString, title: Strings.newReminderString, dueDate: Date())
+        
         detailViewController.configure(reminder: reminder, isNew: true, addAction: { reminder in
             if let index = self.reminderListDataSource?.addReminder(reminder) {
                 self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                self.navigationController?.popViewController(animated: true)
             }
         })
-        let navigationController = UINavigationController(rootViewController: detailViewController)
-        present(navigationController, animated: true, completion: nil)
+        navigationController?.pushViewController(detailViewController, animated: true)
         self.refreshProgressView()
     }
     

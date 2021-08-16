@@ -59,9 +59,7 @@ class ReminderDetailEditDataSource: NSObject {
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
             } else {
-                guard let dueDateCell = cell as? EditDateCell else {
-                    break
-                }
+                let dueDateCell = cell as! EditDateCell
                 dueDateCell.configure(dueDate: reminder.dueDate) { date in
                     self.reminder.dueDate = date
                     self.reminderChangeAction?(self.reminder)
@@ -79,6 +77,33 @@ class ReminderDetailEditDataSource: NSObject {
         }
         return cell
     }
+}
+
+// MARK: - Data Source Methods
+
+extension ReminderDetailEditDataSource: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        ReminderDetailSection.allCases.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        ReminderDetailSection(rawValue: section)?.numOfRowsInSection ?? 0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        dequeueAndConfigureCell(for: indexPath, from: tableView)
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let section = ReminderDetailSection(rawValue: section) else {
+            return nil
+        }
+        return section.sectionTitle
+    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+}
+
+extension ReminderDetailEditDataSource {
     
     enum ReminderDetailSection: Int, CaseIterable {
         case title
@@ -118,29 +143,5 @@ class ReminderDetailEditDataSource: NSObject {
                 return Identifiers.EditNoteCell
             }
         }
-    }
-}
-
-// MARK: - Data Source Methods
-
-extension ReminderDetailEditDataSource: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        ReminderDetailSection.allCases.count
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ReminderDetailSection(rawValue: section)?.numOfRowsInSection ?? 0
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        dequeueAndConfigureCell(for: indexPath, from: tableView)
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = ReminderDetailSection(rawValue: section) else {
-            return nil
-        }
-        return section.sectionTitle
-    }
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
     }
 }

@@ -23,6 +23,9 @@
 		D92C03EB26B1A1B30042237C /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03EA26B1A1B30042237C /* Reminder.swift */; };
 		D92C03EF26B1AC020042237C /* ReminderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03EE26B1AC020042237C /* ReminderListCell.swift */; };
 		D92C03F426B1BB810042237C /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92C03F326B1BB810042237C /* Images.swift */; };
+		D93D462A26C6983900379E8C /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D462926C6983900379E8C /* DateFormatterExtension.swift */; };
+		D93D462C26C6BF4500379E8C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D462B26C6BF4500379E8C /* UIViewController.swift */; };
+		D93D462E26C6C92300379E8C /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93D462D26C6C92300379E8C /* UIStoryboard.swift */; };
 		D93ECF8626BBD5A200B53815 /* ReminderDetailEditDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93ECF8526BBD5A200B53815 /* ReminderDetailEditDataSource.swift */; };
 		D93ECF8826BBE5ED00B53815 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93ECF8726BBE5ED00B53815 /* Identifiers.swift */; };
 		D9D1E1AA26C5996900FADC62 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1E1A926C5996900FADC62 /* Strings.swift */; };
@@ -48,6 +51,9 @@
 		D92C03EA26B1A1B30042237C /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		D92C03EE26B1AC020042237C /* ReminderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListCell.swift; sourceTree = "<group>"; };
 		D92C03F326B1BB810042237C /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		D93D462926C6983900379E8C /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
+		D93D462B26C6BF4500379E8C /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		D93D462D26C6C92300379E8C /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		D93ECF8526BBD5A200B53815 /* ReminderDetailEditDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailEditDataSource.swift; sourceTree = "<group>"; };
 		D93ECF8726BBE5ED00B53815 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		D9D1E1A926C5996900FADC62 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -70,6 +76,9 @@
 			children = (
 				D91DB92626B2F1AD00DFECAB /* UITableViewCell.swift */,
 				D9D1E1AB26C5A2CA00FADC62 /* ReminderExtension.swift */,
+				D93D462926C6983900379E8C /* DateFormatterExtension.swift */,
+				D93D462B26C6BF4500379E8C /* UIViewController.swift */,
+				D93D462D26C6C92300379E8C /* UIStoryboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -245,6 +254,8 @@
 			files = (
 				D9D1E1AC26C5A2CA00FADC62 /* ReminderExtension.swift in Sources */,
 				D91DB92426B2E80500DFECAB /* ReminderDetailViewController.swift in Sources */,
+				D93D462A26C6983900379E8C /* DateFormatterExtension.swift in Sources */,
+				D93D462C26C6BF4500379E8C /* UIViewController.swift in Sources */,
 				D93ECF8626BBD5A200B53815 /* ReminderDetailEditDataSource.swift in Sources */,
 				D9D1E1AA26C5996900FADC62 /* Strings.swift in Sources */,
 				D91DB92726B2F1AD00DFECAB /* UITableViewCell.swift in Sources */,
@@ -257,6 +268,7 @@
 				D91DB92D26B3F55F00DFECAB /* ReminderDetailDataSource.swift in Sources */,
 				D91DB93426B41DFD00DFECAB /* EditNoteCell.swift in Sources */,
 				D91DB93026B41DE400DFECAB /* EditTitleCell.swift in Sources */,
+				D93D462E26C6C92300379E8C /* UIStoryboard.swift in Sources */,
 				D92C03D826B1A0960042237C /* SceneDelegate.swift in Sources */,
 				D93ECF8826BBE5ED00B53815 /* Identifiers.swift in Sources */,
 				D92C03EB26B1A1B30042237C /* Reminder.swift in Sources */,
@@ -408,6 +420,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Today/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -426,6 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Today/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
