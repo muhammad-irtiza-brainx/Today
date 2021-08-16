@@ -59,7 +59,7 @@ class ReminderDetailEditDataSource: NSObject {
             if indexPath.row == 0 {
                 cell.textLabel?.text = formatter.string(from: reminder.dueDate)
             } else {
-                if let dueDateCell = cell as! EditDateCell {
+                if let dueDateCell = cell as? EditDateCell {
                     dueDateCell.configure(dueDate: reminder.dueDate) { date in
                         self.reminder.dueDate = date
                         self.reminderChangeAction?(self.reminder)

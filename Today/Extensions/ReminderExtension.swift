@@ -34,19 +34,21 @@ extension Reminder {
     
     public func dueDateTimeText(for filter: ReminderListDataSource.Filter) -> String {
         let isInToday = Locale.current.calendar.isDateInToday(dueDate)
-        var formatter: String
+        let timeFormatter = Self.timeFormatter.string(from: dueDate)
+        let todayDayFormatter = Self.todayDateFormatter.string(from: dueDate)
+        let futureDateFormatter = Self.futureDateFormatter.string(from: dueDate)
+        
         switch filter {
         case .today:
-            formatter = Self.timeFormatter.string(from: dueDate)
+            return timeFormatter
         case .future:
-            formatter = Self.futureDateFormatter.string(from: dueDate)
+            return futureDateFormatter
         case .all:
             if isInToday {
-                formatter = Self.todayDateFormatter.string(from: dueDate)
+                return todayDayFormatter
             } else {
-                formatter = Self.futureDateFormatter.string(from: dueDate)
+                return futureDateFormatter
             }
         }
-        return formatter
     }
 }
