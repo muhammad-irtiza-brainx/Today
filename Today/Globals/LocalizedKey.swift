@@ -24,6 +24,6 @@ enum LocalizedKey: String {
     case hourMinuteTimeFormat = "hh:mm a"
     
     var string: String {
-        return self.rawValue
+        NSLocalizedString(self.rawValue, comment: "") 
     }
 }
