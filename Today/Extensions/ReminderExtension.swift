@@ -24,9 +24,9 @@ extension Reminder {
         return dateFormatter
     }()
     static let todayDateFormatter: DateFormatter = {
-        let format = NSLocalizedString(Strings.todayDateFormatString, comment: Strings.formatStringForDatesOccuringTodayString)
+        let format = NSLocalizedString(LocalizedKey.todayDateFormat.string, comment: LocalizedKey.formatStringForDatesOccuringToday.string)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = String(format: format, Strings.hourMinuteTimeFormatString)
+        dateFormatter.dateFormat = String(format: format, LocalizedKey.hourMinuteTimeFormat.string)
         return dateFormatter
     }()
     

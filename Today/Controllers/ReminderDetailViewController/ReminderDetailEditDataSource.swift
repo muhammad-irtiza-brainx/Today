@@ -116,11 +116,11 @@ extension ReminderDetailEditDataSource {
         public var sectionTitle: String {
             switch self {
             case .title:
-                return Strings.titleString
+                return LocalizedKey.title.string
             case .dueDate:
-                return Strings.dateString
+                return LocalizedKey.date.string
             case .note:
-                return Strings.noteString
+                return LocalizedKey.note.string
             }
         }
         public var numOfRowsInSection: Int {

@@ -34,7 +34,7 @@ class ReminderListViewController: UITableViewController {
     
     static let reminderListCellIndentifier = Identifiers.reminderListCellIdentifier
     static let showDetailSegueIdentifier = Identifiers.showReminderDetailSegueIndentifier
-    static let mainStoryboardName = Strings.mainString
+    static let mainStoryboardName = LocalizedKey.main.string
     static let detailViewControllerIdentifier = Identifiers.reminderDetailViewControllerIdentifier
     
     // MARK: - Private Properties
@@ -47,8 +47,8 @@ class ReminderListViewController: UITableViewController {
     // MARK: - Private Methods
     
     private func addReminder() {
-        let detailViewController = UIViewController.instantiate(ReminderDetailViewController.self, fromStoryboard: UIStoryboard.Name.Main)
-        let reminder = Reminder(id: UUID().uuidString, title: Strings.newReminderString, dueDate: Date())
+        let detailViewController = UIViewController.instantiate(ReminderDetailViewController.self, fromStoryboard: .Main)
+        let reminder = Reminder(id: UUID().uuidString, title: LocalizedKey.newReminder.string, dueDate: Date())
         
         detailViewController.configure(reminder: reminder, isNew: true, addAction: { reminder in
             if let index = self.reminderListDataSource?.addReminder(reminder) {

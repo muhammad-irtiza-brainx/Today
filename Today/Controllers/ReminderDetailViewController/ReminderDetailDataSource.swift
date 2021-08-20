@@ -61,7 +61,7 @@ class ReminderDetailDataSource: NSObject {
                     return nil
                 }
                 if Locale.current.calendar.isDateInToday(date) {
-                    return NSLocalizedString(Strings.todayString, comment: Strings.todayForDateDescriptionString)
+                    return NSLocalizedString(LocalizedKey.today.string, comment: LocalizedKey.todayForDateDescription.string)
                 }
                 return Self.dateFormatter.string(from: date)
             case .time:

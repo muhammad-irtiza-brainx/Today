@@ -53,7 +53,7 @@ class ReminderDetailViewController: UITableViewController {
             self.temporaryReminder = reminder
             self.editButtonItem.isEnabled = true
         }
-        navigationItem.title = isNew ? NSLocalizedString(Strings.addReminderString, comment: Strings.addReminderNavTitleString) : NSLocalizedString(Strings.editReminderString, comment: Strings.editReminderNavTitleString)
+        navigationItem.title = isNew ? NSLocalizedString(LocalizedKey.addReminder.string, comment: LocalizedKey.addReminderNavTitle.string) : NSLocalizedString(LocalizedKey.editReminder.string, comment: LocalizedKey.editReminderNavTitle.string)
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
     }
     

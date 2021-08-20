@@ -30,6 +30,7 @@
 		D93ECF8826BBE5ED00B53815 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93ECF8726BBE5ED00B53815 /* Identifiers.swift */; };
 		D9D1E1AA26C5996900FADC62 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1E1A926C5996900FADC62 /* Strings.swift */; };
 		D9D1E1AC26C5A2CA00FADC62 /* ReminderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1E1AB26C5A2CA00FADC62 /* ReminderExtension.swift */; };
+		D9E3C9F626CF844700EF5067 /* LocalizedKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E3C9F526CF844700EF5067 /* LocalizedKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		D93ECF8726BBE5ED00B53815 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		D9D1E1A926C5996900FADC62 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		D9D1E1AB26C5A2CA00FADC62 /* ReminderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderExtension.swift; sourceTree = "<group>"; };
+		D9E3C9F526CF844700EF5067 /* LocalizedKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				D92C03F326B1BB810042237C /* Images.swift */,
 				D93ECF8726BBE5ED00B53815 /* Identifiers.swift */,
 				D9D1E1A926C5996900FADC62 /* Strings.swift */,
+				D9E3C9F526CF844700EF5067 /* LocalizedKey.swift */,
 			);
 			path = Globals;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				D9D1E1AC26C5A2CA00FADC62 /* ReminderExtension.swift in Sources */,
 				D91DB92426B2E80500DFECAB /* ReminderDetailViewController.swift in Sources */,
 				D93D462A26C6983900379E8C /* DateFormatterExtension.swift in Sources */,
+				D9E3C9F626CF844700EF5067 /* LocalizedKey.swift in Sources */,
 				D93D462C26C6BF4500379E8C /* UIViewController.swift in Sources */,
 				D93ECF8626BBD5A200B53815 /* ReminderDetailEditDataSource.swift in Sources */,
 				D9D1E1AA26C5996900FADC62 /* Strings.swift in Sources */,
