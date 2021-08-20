@@ -32,10 +32,10 @@ class ReminderListViewController: UITableViewController {
     
     // MARK:- Static Properties
     
-    static let reminderListCellIndentifier = "ReminderListCell"
-    static let showDetailSegueIdentifier = "ShowReminderDetailSegue"
-    static let mainStoryboardName = "Main"
-    static let detailViewControllerIdentifier = "ReminderDetailViewController"
+    static let reminderListCellIndentifier = Identifiers.reminderListCellIdentifier
+    static let showDetailSegueIdentifier = Identifiers.showReminderDetailSegueIndentifier
+    static let mainStoryboardName = LocalizedKey.main.string
+    static let detailViewControllerIdentifier = Identifiers.reminderDetailViewControllerIdentifier
     
     // MARK: - Private Properties
     
@@ -47,16 +47,16 @@ class ReminderListViewController: UITableViewController {
     // MARK: - Private Methods
     
     private func addReminder() {
-        let storyboard = UIStoryboard(name: Self.mainStoryboardName, bundle: nil)
-        let detailViewController: ReminderDetailViewController = storyboard.instantiateViewController(identifier: Self.detailViewControllerIdentifier)
-        let reminder = Reminder(id: UUID().uuidString ,title: "New Reminder", dueDate: Date())
+        let detailViewController = UIViewController.instantiate(ReminderDetailViewController.self, fromStoryboard: .Main)
+        let reminder = Reminder(id: UUID().uuidString, title: LocalizedKey.newReminder.string, dueDate: Date())
+        
         detailViewController.configure(reminder: reminder, isNew: true, addAction: { reminder in
             if let index = self.reminderListDataSource?.addReminder(reminder) {
                 self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                self.navigationController?.popViewController(animated: true)
             }
         })
-        let navigationController = UINavigationController(rootViewController: detailViewController)
-        present(navigationController, animated: true, completion: nil)
+        navigationController?.pushViewController(detailViewController, animated: true)
         self.refreshProgressView()
     }
     
@@ -104,12 +104,14 @@ class ReminderListViewController: UITableViewController {
         })
         tableView.dataSource = reminderListDataSource
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let navigationController = navigationController, navigationController.isToolbarHidden {
             navigationController.setToolbarHidden(false, animated: animated)
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let radius = view.bounds.size.width * 0.5 * 0.7

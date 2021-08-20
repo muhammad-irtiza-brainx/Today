@@ -13,7 +13,7 @@ class ReminderDetailViewController: UITableViewController {
     
     // MARK: - Static Properties
     
-    static let reminderDetailCellIdentifier = "ReminderDetailCell"
+    static let reminderDetailCellIdentifier = Identifiers.reminderDetailCellIdentifier
     
     // MARK: - Private Properties
     
@@ -31,7 +31,6 @@ class ReminderDetailViewController: UITableViewController {
         self.isNew = isNew
         self.reminderAddAction = addAction
         self.reminderEditAction = editAction
-        
         if isViewLoaded {
             setEditing(isNew, animated: false)
         }
@@ -54,9 +53,10 @@ class ReminderDetailViewController: UITableViewController {
             self.temporaryReminder = reminder
             self.editButtonItem.isEnabled = true
         }
-        navigationItem.title = isNew ? NSLocalizedString("Add Reminder", comment: "add reminder nav title") : NSLocalizedString("Edit Reminder", comment: "edit reminder nav title")
+        navigationItem.title = isNew ? LocalizedKey.addReminder.string : LocalizedKey.editReminder.string
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonTrigger))
     }
+    
     fileprivate func transitionToViewMode(_ reminder: Reminder) {
         if isNew {
             let addReminder = temporaryReminder ?? reminder

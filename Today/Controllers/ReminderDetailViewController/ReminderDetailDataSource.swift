@@ -18,7 +18,7 @@ class ReminderDetailDataSource: NSObject {
     
     // MARK: - Static Properties
     
-    static let reminderDetailCellIdentifier = "ReminderDetailCell"
+    static let reminderDetailCellIdentifier = Identifiers.reminderDetailCellIdentifier
     
     // MARK: - Private Properties
     
@@ -32,19 +32,8 @@ class ReminderDetailDataSource: NSObject {
         
         // MARK: - Static Properties
         
-        static let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.timeStyle = .none
-            formatter.dateStyle = .long
-            return formatter
-        }()
-        
-        static let timeFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .none
-            formatter.timeStyle = .short
-            return formatter
-        }()
+        static let dateFormatter = DateFormatter.dateFormatter
+        static let timeFormatter = DateFormatter.timeFormatter
         
         // MARK: - Public Properties
         
@@ -72,7 +61,7 @@ class ReminderDetailDataSource: NSObject {
                     return nil
                 }
                 if Locale.current.calendar.isDateInToday(date) {
-                    return NSLocalizedString("Today", comment: "Today for date description")
+                    return LocalizedKey.today.string
                 }
                 return Self.dateFormatter.string(from: date)
             case .time:

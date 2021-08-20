@@ -78,46 +78,6 @@ class ReminderDetailEditDataSource: NSObject {
         }
         return cell
     }
-    
-    enum ReminderDetailSection: Int, CaseIterable {
-        case title
-        case dueDate
-        case note
-        
-        // MARK: - Public Properties
-        
-        var sectionTitle: String {
-            switch self {
-            case .title:
-                return "Title"
-            case .dueDate:
-                return "Date"
-            case .note:
-                return "Note"
-            }
-        }
-        var numOfRowsInSection: Int {
-            switch self {
-            case .title, .note:
-                return 1
-            case .dueDate:
-                return 2
-            }
-        }
-        
-        // MARK: - Public Methods
-        
-        func cellIdentifier(for row: Int) -> String {
-            switch self {
-            case .title:
-                return Identifiers.EditTitleCell
-            case .dueDate:
-                return row == 0 ? Identifiers.EditDateLabelCell : Identifiers.EditDateCell
-            case .note:
-                return Identifiers.EditNoteCell
-            }
-        }
-    }
 }
 
 // MARK: - Data Source Methods
@@ -141,5 +101,48 @@ extension ReminderDetailEditDataSource: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+}
+
+extension ReminderDetailEditDataSource {
+    
+    enum ReminderDetailSection: Int, CaseIterable {
+        case title
+        case dueDate
+        case note
+        
+        // MARK: - Public Properties
+        
+        public var sectionTitle: String {
+            switch self {
+            case .title:
+                return LocalizedKey.title.string
+            case .dueDate:
+                return LocalizedKey.date.string
+            case .note:
+                return LocalizedKey.note.string
+            }
+        }
+        public var numOfRowsInSection: Int {
+            switch self {
+            case .title, .note:
+                return 1
+            case .dueDate:
+                return 2
+            }
+        }
+        
+        // MARK: - Public Methods
+        
+        public func cellIdentifier(for row: Int) -> String {
+            switch self {
+            case .title:
+                return Identifiers.EditTitleCell
+            case .dueDate:
+                return row == 0 ? Identifiers.EditDateLabelCell : Identifiers.EditDateCell
+            case .note:
+                return Identifiers.EditNoteCell
+            }
+        }
     }
 }

@@ -25,7 +25,6 @@ class EditDateCell: UITableViewCell {
         datePicker.date = dueDate
         self.dateChangeAction = changeAction
     }
-    
     @objc
     public func dateChanged(_ sender: UIDatePicker) {
         dateChangeAction?(sender.date)
